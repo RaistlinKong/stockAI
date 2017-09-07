@@ -93,7 +93,7 @@ class StockData(object):
         pool.close() 
         pool.join()
 
-        print("get_all_dailydata" + str(len(count)) + "stocks end... time cost: " + str(round(timeit.default_timer() - start)) + "s" + "\n")
+        print("get_all_dailydata " + str(len(count)) + " stocks end... time cost: " + str(round(timeit.default_timer() - start)) + "s" + "\n")
         return len(count)
     
     def check_cached_data(self):
@@ -120,9 +120,9 @@ class StockData(object):
         else:
             print('StockData start downloading...\n')
             basics_num = self.get_all_basics()
-            daliydata_num = self.get_all_dailydata()
-            txt = open(filepath,"w")
-            txt.write(str.format('Stock data cached at %s with %d dailydata and %d days stock basics', datetime.datetime.today().strftime('%Y-%m-%d'), dailydata_num, basics_num))
+            dailydata_num = self.get_all_dailydata()
+            txt = open(self.store_path + os.sep + "cacheddata", "w")
+            txt.write('Stock data cached at {0} with {1} dailydata and {2} days stock basics'.format(datetime.datetime.today().strftime('%Y-%m-%d'), dailydata_num, basics_num))
             txt.close()
 
 
